@@ -1,11 +1,36 @@
 # Semantic Keyword Builder
 
-Semantic Keyword Builder is a Streamlit app that generates a semantic keyword builder for SEO and content strategy using an Entity–Attribute–Variable (EAV) framework.
+Semantic Keyword Builder is an open-source Streamlit app that generates a semantically enriched keyword universe for SEO and content strategy using an Entity–Attribute–Variable (EAV) modeling approach.
 
-The app takes basic project context (country, language, website, niche, and optional seed keywords) and returns a structured keyword list with intent, entity, attribute, variable, topic, and cluster annotations. You can explore the results in a table and download them as CSV.
+The app takes basic project context (country, language, website, niche, and optional seed keywords) and returns a structured keyword dataset with intent, topic-level conceptual entities, attributes, variables, topics, and clusters. Results can be explored in a table and downloaded as CSV.
+
+This project focuses on practical, scalable semantic SEO workflows, not on formal knowledge-graph engineering.
 
 ---
+## Important Clarification on “Entities”
+Although the internal prompt uses the term entity (for model compatibility), the app renames this field in the UI and CSV output to:
 
+topic_entity_label
+
+This field represents:
+
+-A conceptual topic-level label for clustering
+-Examples: service types, room types, problem categories, product groups, use cases
+
+It does not represent:
+
+-A resolved Google Knowledge Graph entity
+-A Wikidata / DBpedia / ontology-based entity
+-A formally disambiguated named entity
+
+This distinction is intentional to avoid false semantic precision.
+
+The tool currently performs:
+✅ Conceptual semantic structuring
+❌ Formal knowledge-graph entity resolution
+
+The data model is designed to allow future KG enrichment as a separate layer.
+---
 ## Features
 
 - Interactive Streamlit interface
@@ -17,7 +42,7 @@ The app takes basic project context (country, language, website, niche, and opti
   - Approximate number of keywords
   - Optional seed keywords
 - EAV-based keyword generation:
-  - Entity, attribute, variable fields per keyword
+  - Entity (Topic-level conceptual entity labels), attribute, variable fields per keyword
 - Search intent classification:
   - informational
   - commercial
@@ -154,7 +179,7 @@ The app returns:
      - keyword
      - volume_level
      - intent
-     - entity
+     - topic_entity_label (conceptual, not knowledge-graph)
      - attribute
      - variable
      - source
